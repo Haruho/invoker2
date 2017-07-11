@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CustomInput.cs" />
+    <Compile Include="Assets\Scripts\Global.cs" />
     <Compile Include="Assets\Scripts\ShowInoutChange.cs" />
     <Compile Include="Assets\Scripts\SkillSet.cs" />
   </ItemGroup>
