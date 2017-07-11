@@ -53,7 +53,7 @@ public class Global : MonoBehaviour {
                 s = combiedSkill[8];
                 break;
             case "chaoshengbo":
-                s = combiedSkill[0];
+                s = combiedSkill[9];
                 break;
         }
         return s;

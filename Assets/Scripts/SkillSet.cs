@@ -117,7 +117,7 @@ public class SkillSet : MonoBehaviour {
             {
                 huo++;
             }
-            if (bing == 3)
+            if (bing == 3&&lei == 0&&huo == 0)
             {
                 //急速冷却
                 combine_1.sprite = Global.instance.SkillConfirm("jslq");
