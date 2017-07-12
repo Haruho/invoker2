@@ -5,7 +5,7 @@
 // 文件名(File Name):             SkillSet.cs
 // 作者(Author):                  #zch#
 // 创建时间(CreateTime):           #2017/7/10#
-// 修改者列表(modifier):
+// 修改者列表(modifier):            zch
 // 模块描述(Module description):实现技能组合
 // **********************************************************************
 #endregion
@@ -16,7 +16,6 @@ using UnityEngine.UI;
 public class SkillSet : MonoBehaviour {
     //当前携带的元素
     public List<Image> currentElements;
-    public List<Image> skill;
     //显示当前携带的元素
     public Image current1;
     public Image current2;
@@ -29,10 +28,10 @@ public class SkillSet : MonoBehaviour {
     public Image wex;
     public Image exort;
 
-    private Image tempa;
+    public List<Sprite> skills;
     // Use this for initialization
     void Start () {
-
+    //    temp = combine_1.sprite;
     }
 	
 	// Update is called once per frame
@@ -41,24 +40,11 @@ public class SkillSet : MonoBehaviour {
         if (Input.anyKeyDown)
         {
             GetInput();
+            //当前所携带的元素
+            ChangeElements();
+
+            ChangeSkillImage();
         }
-        //当前所携带的元素
-        ChangeElements();
-
-
-        ////还没有组合技能
-        //if (combine_1.sprite.name == "null" && combine_2.sprite.name == null)
-        //{
-        //    tempa = combine_1;
-        //}
-        ////只有一个组合技能
-        //else if(combine_1.sprite.name != null && combine_2.sprite.name ==null)
-        //{
-        //    tempa = combine_2;
-        //}else if (combine_1.sprite.name != null&&combine_2.sprite.name != null)
-        //{
-        //    com
-        //}
     }
     void GetInput()
     {
@@ -98,11 +84,29 @@ public class SkillSet : MonoBehaviour {
             currentElements.RemoveRange(0, currentElements.Count - 3);
         }
     }
-
+    /// <summary>
+    /// 和上面的函数一样，通过数组来替换图标
+    /// </summary>
+    void ChangeSkillImage()
+    {
+        if (skills.Count!= 0)
+        {
+            combine_1.sprite = skills[skills.Count - 1];
+        }
+        if (skills.Count>1)
+        {
+            combine_2.sprite = skills[skills.Count - 2];
+        }
+        if (skills.Count > 2)
+        {
+            skills.RemoveAt(0);
+        }
+    }
     void CombineElements() {
         int bing = 0;
         int lei = 0;
         int huo = 0;
+        //=============对携带元素进行计数==================
         for (int i =0;i<currentElements.Count;i++)
         {
             if (currentElements[i].sprite.name =="qust")
@@ -117,53 +121,11 @@ public class SkillSet : MonoBehaviour {
             {
                 huo++;
             }
-            if (bing == 3&&lei == 0&&huo == 0)
-            {
-                //急速冷却
-                combine_1.sprite = Global.instance.SkillConfirm("jslq");
-            }else if (bing == 2&& lei ==1 && huo ==0)
-            {
-                //幽灵漫步
-                combine_1.sprite = Global.instance.SkillConfirm("ylmb");
-            }else if (bing ==2 && huo == 1&& lei ==0)
-            {
-                //冰墙
-                combine_1.sprite = Global.instance.SkillConfirm("bingqiang");
-            }else if (lei ==2&&bing ==1&&huo ==0)
-            {
-                //吹风
-                combine_1.sprite = Global.instance.SkillConfirm("chuifeng");
-            }
-            else if (lei == 2 && bing == 0 && huo == 1)
-            {
-                //灵动迅捷
-                combine_1.sprite = Global.instance.SkillConfirm("ldxj");
-            }
-            else if (lei == 1 && bing == 0 && huo == 2)
-            {
-                //陨石
-                combine_1.sprite = Global.instance.SkillConfirm("yunshi");
-            }
-            else if (lei == 0 && bing == 1 && huo == 2)
-            {
-                //火人
-                combine_1.sprite = Global.instance.SkillConfirm("huoren");
-            }
-            else if (lei == 3 && bing == 0 && huo == 0)
-            {
-                //磁暴
-                combine_1.sprite = Global.instance.SkillConfirm("cibao");
-            }
-            else if (lei == 0 && bing == 0 && huo == 3)
-            {
-                //天火
-                combine_1.sprite = Global.instance.SkillConfirm("tianhuo");
-            }
-            else if (lei == 1 && bing == 1 && huo == 1)
-            {
-                //b刀
-                combine_1.sprite = Global.instance.SkillConfirm("chaoshengbo");
-            }
+        }
+        //添加技能并且避免两个位置技能相同
+        if (!skills.Contains(Global.instance.getSkillSprite(bing, lei, huo)))
+        {
+            skills.Add(Global.instance.getSkillSprite(bing, lei, huo));
         }
     }
 }
