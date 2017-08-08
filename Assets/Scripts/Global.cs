@@ -122,7 +122,49 @@ public class Global : MonoBehaviour {
         {
             //b刀
             s =  combiedSkill[9];
+        }else if (lei + bing+huo < 3) //不能唤醒技能的组合
+        {
+            s = combiedSkill[10];
         }
         return s;
+    }
+
+     public float SkillRange(Sprite skill)
+    {
+        string name = skill.name;
+        float range = 0;
+        switch (name)
+        {
+            case "jslq":
+                range = 12;
+                break;
+            case "bingqiang":
+                range = 0;
+                break;
+            case "ylmb":
+                range = 0;
+                break;
+            case "cibao":
+                range = 10.8f;
+                break;
+            case "ldxj":
+                range = 7.8f;
+                break;
+            case "tianhuo":
+                range = 0;
+                break;
+            case "huoren":
+                range = 0;
+                break;
+            case "chuifeng":
+                range = 24;
+                break;
+            case "yunshi":
+                range = 11;
+                break;
+            case "chaoshengbo":
+                range = 10.8f;
+                break;
+        }
     }
 }

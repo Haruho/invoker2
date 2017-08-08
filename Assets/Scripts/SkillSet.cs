@@ -29,9 +29,21 @@ public class SkillSet : MonoBehaviour {
     public Image exort;
 
     public List<Sprite> skills;
+    //技能没进入冷却是不是可以F
+    public static bool isCanCombine;
+    public static SkillSet instance;
+    //当前组合的技能是不是技能栏中的第二个
+    private bool isSameToSecondSkill;
+    //当前组合的技能是不是技能栏中的第一个
+    private bool isSameToFirstSkill;
+    private void Awake()
+    {
+        instance = this;
+    }
     // Use this for initialization
     void Start () {
-    //    temp = combine_1.sprite;
+        //    temp = combine_1.sprite;
+        isCanCombine = true;
     }
 	
 	// Update is called once per frame
@@ -61,10 +73,21 @@ public class SkillSet : MonoBehaviour {
         {
             currentElements.Add(exort);
         }
-        //元素组合
-        if (Input.GetKeyDown(CustomInput.instance.keys[3]))
+        //元素组合   并且执行技能冷却   其中交换技能位置不需要冷却 和  组合相同的英雄不触发冷却
+        if (Input.GetKeyDown(CustomInput.instance.keys[3]) && isCanCombine)
         {
             CombineElements();
+        }
+        //技能键位  默认是Q
+        if (Input.GetKeyDown(CustomInput.instance.keys[4]))
+        {
+            ReleaseSkill.isReadyToRelease = true;
+            ReleaseSkill.combineSkillIndex = 0;
+        }
+        if (Input.GetKeyDown(CustomInput.instance.keys[5]))
+        {
+            ReleaseSkill.isReadyToRelease = true;
+            ReleaseSkill.combineSkillIndex = 1;
         }
     }
     void ChangeElements()
@@ -123,9 +146,34 @@ public class SkillSet : MonoBehaviour {
             }
         }
         //添加技能并且避免两个位置技能相同
-        if (!skills.Contains(Global.instance.getSkillSprite(bing, lei, huo)))
+        //这个函数会在调换两个技能的位置的时候失效
+        //if (!skills.Contains(Global.instance.getSkillSprite(bing, lei, huo)))
+        //{
+        //    skills.Add(Global.instance.getSkillSprite(bing, lei, huo));
+        //}
+
+        //添加第一个技能
+        if (skills.Count == 0)
         {
             skills.Add(Global.instance.getSkillSprite(bing, lei, huo));
+            ColdDown.isInColdDown = true;
+        }
+        //组合技能，不是当前组合调出的技能就行
+        if (!skills[skills.Count-1].Equals((Global.instance.getSkillSprite(bing, lei, huo))))
+        {
+            skills.Add(Global.instance.getSkillSprite(bing, lei, huo));
+        }
+        //这里解决了交换技能位置并不出发冷却的功能
+        if (skills.Count > 1)
+        {
+            if (skills[0].Equals((Global.instance.getSkillSprite(bing, lei, huo))))
+            {
+                ColdDown.isInColdDown = false;
+            }
+            else
+            {
+                ColdDown.isInColdDown = true;
+            }
         }
     }
 }

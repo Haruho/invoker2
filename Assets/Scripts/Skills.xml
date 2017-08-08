@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Skill>
+  <s1 name ="jslq" range = "12">急速冷却，施法距离1000</s1>
+  <s1 name ="bingqiang" range = "3">冰墙，施法距离250</s1>
+  <s1 name ="ylmb" range = "12">幽灵漫步，施法距离0</s1>
+  <s1 name ="cibao" range = "10.8">磁暴，施法距离900</s1>
+  <s1 name ="ldxj" range = "6.6">急速冷却，施法距离650</s1>
+  <s1 name ="tianhuo" range = "10000">急速冷却，施法距离无限</s1>
+  <s1 name ="chuifeng" range = "24">急速冷却，施法距离2000</s1>
+  <s1 name ="chaoshengbo" range = "10.8">急速冷却，施法距离1000</s1>
+</Skill>
