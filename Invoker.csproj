@@ -93,6 +93,7 @@
     <Compile Include="Assets\Scripts\ReleaseSkill.cs" />
     <Compile Include="Assets\Scripts\ShowInputChange.cs" />
     <Compile Include="Assets\Scripts\SkillSet.cs" />
+    <Compile Include="Assets\Scripts\SkillsDistance.cs" />
     <Compile Include="Assets\Scripts\UIEffect.cs" />
   </ItemGroup>
   <ItemGroup>

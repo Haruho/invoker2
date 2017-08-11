@@ -83,11 +83,13 @@ public class SkillSet : MonoBehaviour {
         {
             ReleaseSkill.isReadyToRelease = true;
             ReleaseSkill.combineSkillIndex = 0;
+            ReleaseSkill.skillRange = Global.instance.SkillRange(skills[1]);
         }
         if (Input.GetKeyDown(CustomInput.instance.keys[5]))
         {
             ReleaseSkill.isReadyToRelease = true;
             ReleaseSkill.combineSkillIndex = 1;
+            ReleaseSkill.skillRange = Global.instance.SkillRange(skills[0]);
         }
     }
     void ChangeElements()

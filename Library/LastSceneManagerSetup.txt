@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_Scene/practice.unity
+- path: Assets/_Scene/SkillDIstance.unity
   isLoaded: 1
   isActive: 1

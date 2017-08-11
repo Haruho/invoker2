@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class ReleaseSkill : MonoBehaviour {
+    public static float skillRange;
     public static bool isReadyToRelease;
     public static ReleaseSkill instance;
+    public GameObject skillRangeObject;
     public Transform player;
-
+    public Material transparent;
     public static int combineSkillIndex;
     private void Awake()
     {
@@ -15,28 +17,24 @@ public class ReleaseSkill : MonoBehaviour {
     // Use this for initialization
     void Start () {
         isReadyToRelease = false;
+        skillRangeObject.transform.localScale = new Vector3(0,0.1f,0);
     }
 	
 	// Update is called once per frame
 	void Update () {
         if (isReadyToRelease)
         {
-            ReadyToReleaseSkill(SkillSet.instance.skills[combineSkillIndex] , );
+            ReadyToReleaseSkill(skillRange);
         }
 	}
     //按下技能键代表准备释放技能
-    public void ReadyToReleaseSkill(Sprite skill , float range)
+    public void ReadyToReleaseSkill(float range)
     {
-        if (GameObject.FindGameObjectWithTag("Range"))
+        skillRangeObject.transform.localScale = new Vector3(range, 0.1f, range);
+        if (Input.GetMouseButtonDown(1))
         {
-            GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-            go.transform.tag = "Range";
-            go.transform.position = player.position;
-            go.transform.localScale = new Vector3(skillRange, 0.03f, skillRange);
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            print("asdasdasd");
+            skillRangeObject.transform.localScale = new Vector3(0, 0.1f, 0);
+            isReadyToRelease = false;
         }
     }
 }

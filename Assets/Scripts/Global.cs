@@ -166,5 +166,6 @@ public class Global : MonoBehaviour {
                 range = 10.8f;
                 break;
         }
+        return range;
     }
 }
